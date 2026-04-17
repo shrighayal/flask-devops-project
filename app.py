@@ -1,14 +1,15 @@
 from flask import Flask
 import pymysql
+import os
 
 app = Flask(__name__)
 
 def get_db_connection():
     return pymysql.connect(
-        host='db',
-        user='admin',
-        password='admin123',
-        database='devops_db'
+        host=os.getenv('MYSQL_HOST', 'db'),
+        user=os.getenv('MYSQL_USER'),
+        password=os.getenv('MYSQL_PASSWORD'),
+        database=os.getenv('MYSQL_DB')
     )
 
 @app.route('/')
