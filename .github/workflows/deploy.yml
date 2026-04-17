@@ -1,0 +1,36 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-push-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build Docker Image
+      run: docker build -t shrikantghayal/flask-app:latest .
+
+    - name: Login to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASS }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+
+    - name: Push Docker Image
+      run: docker push shrikantghayal/flask-app:latest
+
+    # 🔥 NEW PART STARTS HERE
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v3
+
+    - name: Configure kubeconfig
+      run: |
+        echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig.yaml
+        export KUBECONFIG=$PWD/kubeconfig.yaml
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl set image deployment/flask-app flask=shrikantghayal/flask-app:latest
