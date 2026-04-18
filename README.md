@@ -1,5 +1,10 @@
 # 🚀 Flask DevOps Project (CI/CD + Docker + AWS + Grafana)
 
+![CI/CD](https://img.shields.io/badge/CI-CD-GitHub%20Actions-blue)
+![Docker](https://img.shields.io/badge/Container-Docker-blue)
+![AWS](https://img.shields.io/badge/Cloud-AWS-orange)
+![Monitoring](https://img.shields.io/badge/Monitoring-Grafana-purple)
+
 ## 📌 Project Overview
 
 This project demonstrates a complete **DevOps pipeline** for deploying a Flask application using modern tools and cloud infrastructure.
@@ -114,6 +119,20 @@ Grafana is used to monitor:
 * IAM permission issues
 
 ---
+## ⚠️ Challenges & Solutions
+
+* Fixed Docker login issue in CI/CD using GitHub secrets
+* Resolved AWS security group port access
+* Debugged pipeline failures
+* Integrated monitoring using Grafana
+
+---
+
+## 💼 Business Value
+
+- Reduced manual deployment effort using CI/CD
+- Improved system reliability with monitoring
+- Scalable architecture using AWS
 
 ## 🎯 Learning Outcome
 
